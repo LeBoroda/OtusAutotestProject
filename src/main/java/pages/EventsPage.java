@@ -1,31 +1,30 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class EventsPage extends AbsPage{
+public class EventsPage extends AbsPage {
     public EventsPage(WebDriver driver) {
         super(driver, "/events/near/");
     }
 
-    public void scrollPage(){
+    public void scrollPage() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        String loaderSelector = "div[class*='dod_new-loader-wrapper_visible']";
 
-        try {
-            long lastHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
+        long lastHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
 
-            while (true) {
-                jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-                Thread.sleep(1000);
-
-                long newHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
-                if (newHeight == lastHeight) {
-                    break;
-                }
-                lastHeight = newHeight;
+        while (true) {
+            jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            waiter.waitForCondition(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(loaderSelector)));
+            waiter.waitForCondition(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(loaderSelector))));
+            long newHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
+            if (newHeight == lastHeight) {
+                break;
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            lastHeight = newHeight;
         }
     }
 }
