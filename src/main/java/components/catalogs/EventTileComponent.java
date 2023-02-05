@@ -29,6 +29,7 @@ public class EventTileComponent extends AbsComponent {
     }
 
     private String getMonthNumber(String monthName){
+
         switch (monthName) {
             case "января":
                return  "01";
