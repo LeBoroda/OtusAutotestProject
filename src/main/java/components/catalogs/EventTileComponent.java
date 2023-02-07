@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class EventTileComponent extends AbsComponent {
 
@@ -34,12 +36,7 @@ public class EventTileComponent extends AbsComponent {
     }
 
     private String getMonthNumber(String monthName) {
-        String result = "";
-        for (CalendarData month : CalendarData.values()) {
-            if (month.getName().equals(monthName)) {
-                return month.getNumber();
-            }
-        }
-        return result;
+        Stream<CalendarData> calDat = Arrays.stream(CalendarData.values());
+        return calDat.filter(month -> month.getName().equals(monthName)).findFirst().get().getNumber();
     }
 }
