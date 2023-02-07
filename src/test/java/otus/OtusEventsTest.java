@@ -61,8 +61,8 @@ public class OtusEventsTest {
         new EventsPage(driver)
                 .scrollPage();
         EventsCatalogComponent eventsCatalog = new EventsCatalogComponent(driver);
-                eventsCatalog
-                        .checkEventTileDate();
+        eventsCatalog
+                .checkEventTileDate();
         new EventsCatalogMenuComponent(driver)
                 .clickEventsMenu(EventsMenuData.OPENDOORS);
         eventsCatalog

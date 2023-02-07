@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,12 +18,22 @@ public class EventsCatalogComponent extends AbsComponent {
         super(driver);
     }
     public void checkEventTileDate(){
+        checkScheduledEventTileDate();
+        checkOnlineEventTileDate();
+    }
+    public void checkScheduledEventTileDate(){
         List<WebElement> eventsList = $$(By.cssSelector(eventsCatalogSelector));
         for(int i=1; i<=eventsList.size(); i++) {
             String eventTileSelector = eventsCatalogSelector + " a:nth-child(" + i + ")";
             LocalDate eventDate = new EventTileComponent(driver).getEventDate(eventTileSelector);
             LocalDate todayDate = LocalDate.now();
             Assertions.assertFalse(eventDate.isBefore(todayDate));
+        }
+    }
+    public void checkOnlineEventTileDate(){
+        boolean isAnythingOnline = waiter.waitForCondition(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(onlineEventsCatalogSelector)));
+        if(isAnythingOnline){
+            checkScheduledEventTileDate();
         }
     }
     public void checkEventTileCategory(EventsMenuData eventsMenuData){
