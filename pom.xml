@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.example</groupId>
     <artifactId>OtusAutoTestProject</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -15,7 +14,7 @@
         <webdriver.manager.version>5.3.2</webdriver.manager.version>
         <selenium.java.version>4.8.0</selenium.java.version>
         <junit.version>5.9.2</junit.version>
-        <base.url>https://otus.ru</base.url>
+        <base.url>base.url</base.url>
     </properties>
     <dependencies>
         <dependency>
