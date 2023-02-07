@@ -15,9 +15,6 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 
 public class OtusCoursesTest {
-/*
-******Реализована возможность кроссбаузерного тестирования и удаленного запуска тестов
-*/
 
     private WebDriver driver;
     @BeforeAll

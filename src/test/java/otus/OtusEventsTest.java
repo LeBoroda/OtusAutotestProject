@@ -19,11 +19,9 @@ import pages.EventsPage;
 import pages.MainPage;
 
 public class OtusEventsTest {
+
 /*
-******Реализована возможность кроссбаузерного тестирования и удаленного запуска тестов
-
 Проверить даты на мероприятиях, идущих в прямом эфире после 20:00
-
  */
 
     private WebDriver driver;
@@ -47,6 +45,7 @@ public class OtusEventsTest {
     public void testOtusEvents(){
         new MainPage(driver)
                 .open();
+
         HeaderMenuPopup headerMenuPopup = new HeaderMenuPopup(driver);
         headerMenuPopup
                 .popUpShouldNotBeVisible(HeaderMenuItemsData.LEARNING);
@@ -58,13 +57,17 @@ public class OtusEventsTest {
                 .popUpShouldBeVisible(HeaderMenuItemsData.LEARNING);
         headerMenuPopup
                 .clickMenuItemByName(HeaderSubSubMenuEventsData.EVENTS);
+
         new EventsPage(driver)
                 .scrollPage();
+
         EventsCatalogComponent eventsCatalog = new EventsCatalogComponent(driver);
         eventsCatalog
                 .checkEventTileDate();
+
         new EventsCatalogMenuComponent(driver)
                 .clickEventsMenu(EventsMenuData.OPENDOORS);
+
         eventsCatalog
                 .checkEventTileCategory(EventsMenuData.OPENDOORS);
     }
