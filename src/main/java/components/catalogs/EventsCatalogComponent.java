@@ -12,32 +12,38 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class EventsCatalogComponent extends AbsComponent {
-    private final String eventsCatalogSelector = "div[class='dod_new-events__list js-dod_new_events']";
+    private final String scheduledEventsCatalogSelector = "div[class='dod_new-events__list js-dod_new_events']";
     private final String onlineEventsCatalogSelector = "section[class='dod_new-events dod_new-online-translations js-online-translations']";
     public EventsCatalogComponent(WebDriver driver) {
         super(driver);
     }
     public void checkEventTileDate(){
-        checkScheduledEventTileDate();
-        checkOnlineEventTileDate();
+        checkScheduledEventTileDate(scheduledEventsCatalogSelector);
+        checkCurrentEventTileDate(onlineEventsCatalogSelector);
     }
-    public void checkScheduledEventTileDate(){
-        List<WebElement> eventsList = $$(By.cssSelector(eventsCatalogSelector));
+    public void checkScheduledEventTileDate(String eventsSelector){
+        List<WebElement> eventsList = $$(By.cssSelector(eventsSelector));
         for(int i=1; i<=eventsList.size(); i++) {
-            String eventTileSelector = eventsCatalogSelector + " a:nth-child(" + i + ")";
+            String eventTileSelector = eventsSelector + " a:nth-child(" + i + ")";
             LocalDate eventDate = new EventTileComponent(driver).getEventDate(eventTileSelector);
             LocalDate todayDate = LocalDate.now();
             Assertions.assertFalse(eventDate.isBefore(todayDate));
         }
     }
-    public void checkOnlineEventTileDate(){
+    public void checkCurrentEventTileDate(String onlineEventsSelector){
         boolean isAnythingOnline = waiter.waitForCondition(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(onlineEventsCatalogSelector)));
         if(isAnythingOnline){
-            checkScheduledEventTileDate();
+            List<WebElement> eventsList = $$(By.cssSelector(onlineEventsSelector));
+            for(int i=1; i<=eventsList.size(); i++) {
+                String eventTileSelector = onlineEventsSelector + " a:nth-child(" + i + ")";
+                LocalDate eventDate = new EventTileComponent(driver).getEventDate(eventTileSelector);
+                LocalDate todayDate = LocalDate.now();
+                Assertions.assertFalse(eventDate.isEqual(todayDate));
+            }
         }
     }
     public void checkEventTileCategory(EventsMenuData eventsMenuData){
-        List<WebElement> eventsList = $$(By.cssSelector(eventsCatalogSelector));
+        List<WebElement> eventsList = $$(By.cssSelector(scheduledEventsCatalogSelector));
         String categoryName = getCategoryName(eventsMenuData);
         for(int i=1; i<=eventsList.size(); i++) {
             Assertions.assertEquals(categoryName,new EventTileComponent(driver).getEventCategory());
