@@ -1,9 +1,5 @@
 package data;
 
-import sun.util.resources.ro.CalendarData_ro;
-
-import java.util.stream.Stream;
-
 public enum CalendarData {
     JANUARY("января", "01"),
     FEBRUARY("февраля", "02"),
@@ -18,8 +14,8 @@ public enum CalendarData {
     NOVEMBER("ноября","11"),
     DECEMBER("декабря","12");
 
-    private String monthName;
-    private String monthNumber;
+    private final String monthName;
+    private final String monthNumber;
 
     CalendarData(String monthName, String monthNumber){
         this.monthName = monthName;
@@ -32,9 +28,5 @@ public enum CalendarData {
 
     public String getNumber() {
         return monthNumber;
-    }
-
-    public static Stream<CalendarData> calendarDataStream(){
-        return Stream.of(CalendarData.values());
     }
 }
