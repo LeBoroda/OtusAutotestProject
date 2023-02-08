@@ -24,7 +24,7 @@ public class EventsCatalogComponent extends AbsComponent {
     public void checkScheduledEventTileDate(String eventsSelector){
         List<WebElement> eventsList = $$(By.cssSelector(eventsSelector));
         for(int i=1; i<=eventsList.size(); i++) {
-            String eventTileSelector = eventsSelector + " a:nth-child(" + i + ")";
+            String eventTileSelector = String.format("%s a:nth-child(%d)", eventsSelector, i);
             LocalDate eventDate = new EventTileComponent(driver).getEventDate(eventTileSelector);
             LocalDate todayDate = LocalDate.now();
             Assertions.assertFalse(eventDate.isBefore(todayDate));
@@ -35,10 +35,10 @@ public class EventsCatalogComponent extends AbsComponent {
         if(isAnythingOnline){
             List<WebElement> eventsList = $$(By.cssSelector(onlineEventsSelector));
             for(int i=1; i<=eventsList.size(); i++) {
-                String eventTileSelector = onlineEventsSelector + " a:nth-child(" + i + ")";
-                LocalDate eventDate = new EventTileComponent(driver).getEventDate(eventTileSelector);
+                String eventTileSelector = String.format("%s a:nth-child(%d)", onlineEventsSelector, i);
+                LocalDate eventDate = new EventTileComponent(driver).getCurrentEventDate(eventTileSelector);
                 LocalDate todayDate = LocalDate.now();
-                Assertions.assertFalse(eventDate.isEqual(todayDate));
+                Assertions.assertTrue(eventDate.isEqual(todayDate));
             }
         }
     }

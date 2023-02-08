@@ -14,7 +14,7 @@ public class TestingCoursePageFactory {
         this.path = path;
     }
 
-    private String getPageWersion(String path){
+    private String getPageVersion(String path){
         String result = path
                 .toUpperCase()
                 .replaceAll(" ","")
@@ -23,7 +23,7 @@ public class TestingCoursePageFactory {
         return result;
     }
     public AbsTestingCoursePage createTestingCoursePage(String path){
-        String pageVersion = getPageWersion(path);
+        String pageVersion = getPageVersion(path);
         AbsTestingCoursePage testingCoursePage = null;
         switch (TestCoursePageVersionData.valueOf(pageVersion)){
             case QALEAD:

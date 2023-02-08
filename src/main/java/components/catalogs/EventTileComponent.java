@@ -13,7 +13,7 @@ public class EventTileComponent extends AbsComponent {
 
     private final String dateSelectorTemplate = " span[class='dod_new-event__icon dod_new-event__calendar-icon']+span";
     private final String categoryNameSelector = "div[class ='dod_new-events__list js-dod_new_events'] div[class='dod_new-type__text']";
-    private final String nowOnlineSelector = "span[class = 'dod_new-online-translation__status-text']";
+    private final String nowOnlineSelector = " span[class = 'dod_new-online-translation__status-text']";
 
     public EventTileComponent(WebDriver driver) {
         super(driver);
@@ -28,6 +28,15 @@ public class EventTileComponent extends AbsComponent {
             dayNumber = String.format("%s%s", "0", dayNumber);
         String stringDate = String.format("2023-%s-%s", getMonthNumber(eventStringDate[1]), dayNumber);
         result = LocalDate.parse(stringDate);
+        return result;
+    }
+
+    public LocalDate getCurrentEventDate(String tileSelector){
+        LocalDate result = null;
+        String tileDateSelector = tileSelector+nowOnlineSelector;
+        String eventDate = $(By.cssSelector(tileDateSelector)).getText();
+        if(eventDate.equals("Сейчас в эфире"))
+            result = LocalDate.now();
         return result;
     }
 

@@ -32,8 +32,7 @@ public class CoursesCatalogComponent extends AbsComponent {
 
     public void checkAllCourseTiles(){
         for(int i=1; i<=testingCoursesList.size(); i++){
-
-            String tileLocator = coursesCatalogLocator+"["+i+"]";
+            String tileLocator = String.format("%s[%d]", coursesCatalogLocator, i);
             if(i>10){
                 expandCatalogue();
                 waiter.waitForCondition(ExpectedConditions.attributeContains(By.xpath(tileLocator),"href", tileLocator));
