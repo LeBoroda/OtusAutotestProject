@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 public class ManualTestingPage extends AbsTestingCoursePage{
-    private final String courseNameLocator = "//*[@id='__next']/div[2]/div[2]/div[1]/div/div[2]/div[1]/h3";
-    private final String courseDescriptionLocator = "//*[@id='__next']/div[2]/div[2]/div[1]/div/div[2]/div[1]/h3//following::ul";
+    private final String courseNameLocator = "(//*[@id='__next']//following::h3)[1]";
+    private final String courseDescriptionLocator = "//*[@id='__next']//following::ul";
     private final String courseFormatLocator = "//h3[contains(text(),'Формат обучения')]";
 
     public ManualTestingPage(WebDriver driver, String path) {

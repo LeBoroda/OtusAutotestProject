@@ -20,10 +20,6 @@ import pages.MainPage;
 
 public class OtusEventsTest {
 
-/*
-Проверить даты на мероприятиях, идущих в прямом эфире после 20:00
- */
-
     private WebDriver driver;
     @BeforeAll
     public static void setUp(){
