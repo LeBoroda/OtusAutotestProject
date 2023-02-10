@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class EventsCatalogComponent extends AbsComponent {
-    private final String scheduledEventsCatalogSelector = "div[class='dod_new-events__list js-dod_new_events']";
-    private final String onlineEventsCatalogSelector = "section[class='dod_new-events dod_new-online-translations js-online-translations']";
+    private final String scheduledEventsCatalogSelector = "div[class*='dod_new-events__list']";
+    private final String onlineEventsCatalogSelector = ".dod_new-events.dod_new-online-translations.js-online-translations";
     public EventsCatalogComponent(WebDriver driver) {
         super(driver);
     }

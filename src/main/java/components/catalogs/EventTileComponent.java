@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 public class EventTileComponent extends AbsComponent {
 
-    private final String dateSelectorTemplate = " span[class='dod_new-event__icon dod_new-event__calendar-icon']+span";
-    private final String categoryNameSelector = "div[class ='dod_new-events__list js-dod_new_events'] div[class='dod_new-type__text']";
+    private final String dateSelectorTemplate = " .dod_new-event__calendar-icon.dod_new-event__icon+span";
+    private final String categoryNameSelector = ".dod_new-events__list.js-dod_new_events div[class='dod_new-type__text']";
     private final String nowOnlineSelector = " span[class = 'dod_new-online-translation__status-text']";
 
     public EventTileComponent(WebDriver driver) {

@@ -14,7 +14,7 @@
         <webdriver.manager.version>5.3.2</webdriver.manager.version>
         <selenium.java.version>4.8.0</selenium.java.version>
         <junit.version>5.9.2</junit.version>
-        <base.url>base.url</base.url>
+        <base.url>https://otus.ru</base.url>
     </properties>
     <dependencies>
         <dependency>

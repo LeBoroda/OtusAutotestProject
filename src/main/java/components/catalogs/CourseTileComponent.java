@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseTileComponent extends AbsComponent {
-    private final String tileCourseInfoLocator = "/div[2]/div[1]/div";
-    private final String tileCourseNameLocator = "/h6/div";
+    private final String tileCourseInfoLocator = "//h6//following::div[2]//child::div";
+    private final String tileCourseNameLocator = "//h6//child::div[1]";
 
     public CourseTileComponent(WebDriver driver) {
         super(driver);
